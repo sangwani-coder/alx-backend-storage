@@ -8,5 +8,5 @@ CREATE VIEW ranks
 	AS SELECT origin AS origin,
 	SUM(fans) as nb_fans
        	FROM metal_bands
-	GROUP BY origin
+	GROUP BY origin HAVING COUNT(fans) > 1
        	ORDER BY SUM(fans) DESC;
