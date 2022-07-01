@@ -6,4 +6,7 @@
 -- Create a view
 CREATE VIEW ranks
 	AS SELECT origin AS origin,
-	fans AS nb_fans FROM metal_bands GROUP BY fans HAVING COUNT(*) > 1;
+	fans AS nb_fans
+       	FROM metal_bands
+       	GROUP BY fans
+       	HAVING COUNT(fans) > 1;
