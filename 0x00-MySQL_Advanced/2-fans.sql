@@ -4,5 +4,6 @@
 -- Column names must be: origin and nb_fans
 
 -- Create a view
-CREATE VIEW ranks AS SELECT origin AS origin,
-	fans AS nb_fans FROM metal_bands ORDER BY fans DESC;
+CREATE VIEW ranks
+	AS SELECT origin AS origin,
+	fans AS nb_fans FROM metal_bands ORDER BY fans HAVING COUNT(*) > 1 DESC;
