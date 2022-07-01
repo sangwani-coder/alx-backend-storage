@@ -14,3 +14,4 @@ CREATE TABLE IF NOT EXISTS users(
 	UNIQUE (email),
 	PRIMARY KEY (id)
 	);
+
