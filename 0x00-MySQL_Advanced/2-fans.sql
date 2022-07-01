@@ -3,10 +3,9 @@
 -- Import table dump: metal_bands.sql.zip
 -- Column names must be: origin and nb_fans
 
--- Create a view
-CREATE VIEW ranks
-	AS SELECT origin AS origin,
+-- select columns
+SELECT origin AS origin,
 	SUM(fans) as nb_fans
        	FROM metal_bands
 	GROUP BY origin HAVING COUNT(fans) > 1
-       	ORDER BY SUM(fans) DESC;
+	ORDER BY nb_fans DESC;
