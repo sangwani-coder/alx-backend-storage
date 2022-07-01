@@ -4,7 +4,7 @@
 -- Column names must be: origin and nb_fans
 
 -- select columns
-SELECT origin AS origin,
+SELECT origin,
 	SUM(fans) as nb_fans
        	FROM metal_bands
 	GROUP BY origin HAVING COUNT(fans) > 1
