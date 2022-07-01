@@ -7,5 +7,5 @@
 SELECT origin,
 	SUM(fans) as nb_fans
        	FROM metal_bands
-	GROUP BY origin HAVING COUNT(fans) > 1
-	ORDER BY nb_fans DESC;
+	GROUP BY 1
+	ORDER BY 2 DESC;
