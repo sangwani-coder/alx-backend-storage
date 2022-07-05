@@ -6,8 +6,10 @@ from pymongo import MongoClient
 
 
 def get_method_logs(col, method):
-    get = col.count_documents({"method" : method})
-    return get
+    """ helper function to count logs"""
+
+    return col.count_documents({"method" : method})
+
 
 def log_stats():
     """provides stats about Nginx logs stored in MongoDB"""
@@ -18,10 +20,8 @@ def log_stats():
 
     logs = col.count_documents({})
     methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
-    methodCount = col.find({"method" : "GET"})
-    stats = 1200
 
-    # Print output
+    # Print output given in example
     print(logs, "logs")
     print("Methods:")
 
@@ -29,7 +29,7 @@ def log_stats():
         logs = get_method_logs(col, i)
         print("\t", "method {}:".format(i), logs)
 
-    print(stats, "status check")
+    print(col.count_documents({"method" :"GET", "path": "/status"}), "status check")
 
 # call main function
 log_stats()
