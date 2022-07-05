@@ -4,7 +4,6 @@
 if __name__ == "__main__":
     from pymongo import MongoClient
 
-
     def log_stats():
         """provides stats about Nginx logs stored in MongoDB"""
         # Connect databse
