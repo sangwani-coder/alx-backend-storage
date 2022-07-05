@@ -8,7 +8,7 @@ from pymongo import MongoClient
 def get_method_logs(col, method):
     """ helper function to count logs"""
 
-    return col.count_documents({"method" : method})
+    return col.count_documents({"method": method})
 
 
 def log_stats():
@@ -29,8 +29,9 @@ def log_stats():
         logs = get_method_logs(col, i)
         print("\t", "method {}:".format(i), logs)
 
-    print(col.count_documents({"method" :"GET", "path": "/status"}), "status check")
+    print(col.count_documents(
+        {"method": "GET", "path": "/status"}), "status check")
+
 
 # call main function
 log_stats()
-
