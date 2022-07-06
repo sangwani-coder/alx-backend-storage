@@ -18,6 +18,20 @@ def count_calls(method: Callable) -> Callable:
     return increment
 
 
+def call_history(method: Callable) -> Callable:
+    """ Decorator"""
+    @wraps(method)
+    def wrapped(self, *args, **kwargs):
+        """ store input and output"""
+        Input = str(args)
+        q_name = method.__qualname__
+        self._redis.rpush(q_name + ":inputs", Input)
+        output = str(method(self, *args, **kwargs))
+        self._redis.rpush(q_name + ":outputs", output)
+        return output
+    return wrapped
+
+
 class Cache():
     """ stores an instance of the redis client"""
     def __init__(self):
@@ -25,6 +39,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """" generate a random key using uuid"""
