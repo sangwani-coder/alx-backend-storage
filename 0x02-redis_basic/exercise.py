@@ -20,7 +20,7 @@ class Cache():
 
     def get(self
             key: str,
-            fn: Optional[Callabe] = None) -> Union[str, byrtes, int, float]:
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """ extract informtion saved in redis"""
         value = self._redis.get(key)
         if fn:
@@ -28,7 +28,7 @@ class Cache():
         return value
 
     def get_str(self, key: str) -> str:
-        """ utomatically parametrize Cache.get
+        """ Automatically parametrize Cache.get
             with the correct conversion function.
         """
         value = self._redis.get(key)
