@@ -2,7 +2,7 @@
 """ defines a class Cache"""
 import redis
 import uuid
-from typing import Union, Type, Callable, Optional
+from typing import Union, Callable, Optional
 
 
 class Cache():
@@ -18,7 +18,7 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get(self
+    def get(self,
             key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """ extract informtion saved in redis"""
