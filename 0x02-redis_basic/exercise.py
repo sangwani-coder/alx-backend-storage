@@ -32,6 +32,30 @@ def call_history(method: Callable) -> Callable:
     return wrapped
 
 
+def replay(fn: Callable):
+    """ display history of calls of a function"""
+    r = redis.Redis()
+    func_name = fn.__qualname__
+    count = r.get(func_name)
+    try:
+        count = int(count.decode('UTF-8'))
+    except Exception:
+        count = 0
+    print("{} was called {} times:".format(func_name, count))
+    inputs = r.lrange("{}:inputs".format(func_name), 0, -1)
+    outputs = r.lrange("{}:outputs".format(func_name), 0, -1)
+    for o, t in zip(inputs, outputs):
+        try:
+            one = o.decode('UTF-8')
+        except Exception:
+            one = ""
+        try:
+            two = t.decode('UTF-8')
+        except Exception:
+            two = ""
+        print("{} (*{}) -> {}".format(func_name, one, two))
+
+
 class Cache():
     """ stores an instance of the redis client"""
     def __init__(self):
