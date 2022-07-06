@@ -1,4 +1,4 @@
 __pycache__/
 dump/
-*.u.~
 *~
+redis-env
