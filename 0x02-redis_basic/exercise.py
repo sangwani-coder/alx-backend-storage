@@ -38,7 +38,7 @@ def replay(fn: Callable):
     func_name = fn.__qualname__
     count = r.get(func_name)
     try:
-        count = int(count.decode('UTF-8'))
+        count = int(count.decode('utf-8'))
     except Exception:
         count = 0
     print("{} was called {} times:".format(func_name, count))
@@ -46,14 +46,14 @@ def replay(fn: Callable):
     outputs = r.lrange("{}:outputs".format(func_name), 0, -1)
     for o, t in zip(inputs, outputs):
         try:
-            one = o.decode('UTF-8')
+            one = o.decode('utf-8')
         except Exception:
             one = ""
         try:
-            two = t.decode('UTF-8')
+            two = t.decode('utf-8')
         except Exception:
             two = ""
-        print("{} (*{}) -> {}".format(func_name, one, two))
+        print("{} (*{}) -> {}".format(func_name, o, t))
 
 
 class Cache():
