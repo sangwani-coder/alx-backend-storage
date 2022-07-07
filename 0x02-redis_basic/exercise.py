@@ -53,7 +53,7 @@ def replay(fn: Callable):
             two = t.decode('utf-8')
         except Exception:
             two = ""
-        print("{} (*{}) -> {}".format(func_name, o, t))
+        print("{}(*{},) -> {}".format(func_name, o, t))
 
 
 class Cache():
