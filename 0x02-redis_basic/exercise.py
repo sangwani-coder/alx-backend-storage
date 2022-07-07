@@ -44,7 +44,7 @@ def replay(fn: Callable):
     print("{} was called {} times:".format(func_name, count))
     inputs = r.lrange("{}:inputs".format(func_name), 0, -1)
     outputs = r.lrange("{}:outputs".format(func_name), 0, -1)
-    for o, t in zip(inputs, outputs):
+    for one, two in zip(inputs, outputs):
         try:
             one = o.decode('utf-8')
         except Exception:
@@ -53,7 +53,7 @@ def replay(fn: Callable):
             two = t.decode('utf-8')
         except Exception:
             two = ""
-        print("{}(*{},) -> {}".format(func_name, o, t))
+        print("{}(*{},) -> {}".format(func_name, one, two))
 
 
 class Cache():
@@ -88,6 +88,7 @@ class Cache():
         return value.decode('UTF-8')
 
     def get_int(self, key: str) -> int:
+        """ Parameterize cache from redis to string"""
         value = self._redis.get(key)
         try:
             value = int(value.decode('UTF-8'))
